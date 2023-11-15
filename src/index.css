@@ -1,0 +1,55 @@
+@import url('./vendor/normalize.css');
+@import url('./vendor/inter.css');
+
+:root {
+  --main-background: #202020;
+  --secondary-background: #272727;
+  --primary-color: #3DDC84;
+  --attention-color: #EE3465;
+  --transition-duration: .3s;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+.page {
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  margin: 0 auto;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: var(--main-background);
+  color: white;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition-duration);
+}
+
+.link:hover {
+  opacity: .7;
+}
+
+.button:hover {
+  opacity: .7;
+}
+
+.button {
+  transition: opacity var(--transition-duration);
+  cursor: pointer;
+  border: none;
+}

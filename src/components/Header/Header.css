@@ -1,0 +1,143 @@
+.header {
+  padding: 18px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+  "left middle right";
+  align-items: center;
+  position: relative;
+}
+
+.header__burger {
+  display: none;
+}
+
+.header__link {
+  height: 38px;
+}
+
+.header__account {
+  grid-area: right;
+  justify-self: end;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background: #313131;
+  border: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 114.286%;
+  color: white;
+}
+
+.header__buttons {
+  display: flex;
+  column-gap: 30px;
+  grid-area: right;
+  justify-self: end;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 133.333%;
+  align-items: center;
+}
+
+.header__button {
+  border-radius: 3px;
+  padding: 8px 20px;
+  border: none;
+  background: #3DDC84;
+  color: black;
+}
+
+.header__burger-menu {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 159px 90px 90px;
+  transform: translateX(100%);
+  top: 0;
+  right: 0;
+  width: 520px;
+  height: 100vh;
+  background-color: #202020;
+  z-index: 1;
+  transition: all var(--transition-duration);
+}
+
+.header__burger-menu_opened {
+  transform: translateX(0);
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__account {
+    display: none;
+  }
+
+  .header__burger {
+    display: block;
+    width: 44px;
+    background-image: url('../../images/burger-menu.svg');
+    height: 44px;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  .header__burger-menu {
+    display: flex;
+  }
+
+  .header__account_768 {
+    margin-top: auto;
+    display: inline-block;
+  }
+
+  .header__burger-close {
+    width: 44px;
+    height: 44px;
+    background-image: url('../../images/close-button.svg');
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header__burger-menu {
+    width: 100vw;
+    padding: 144px 10px 46px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .header {
+    padding: 18px 14px;
+  }
+
+  .header__buttons {
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+    column-gap: 14px;
+  }
+
+  .header__button {
+    padding: 5px 12px;
+  }
+
+  .header__burger {
+    right: 14px;
+  }
+}
