@@ -8,7 +8,7 @@ const MoviesCardList = ({data, toDelete = undefined}) => {
       <div className='moviesList'>
         {data.map((item) => <MoviesCard toDelete={toDelete} isSaved={item.isSaved} key={item.id} duration={item.duration} img={item.image} title={item.nameRU}/>)}
       </div>
-      <button className='button moviesList__button'>Ещё</button>
+      <button className='button moviesList-button'>Ещё</button>
     </>
   )
 }

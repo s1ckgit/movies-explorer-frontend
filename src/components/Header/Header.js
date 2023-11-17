@@ -21,12 +21,12 @@ const Header = ({authorized}) => {
           <img src={logo} alt='Логотип' className='header__logo'/>
         </NavLink>
         {authorized && <Navigation />}
-        {authorized && <button className='header__account'><NavLink to='/profile' className='link'>Аккаунт</NavLink></button>}
+        {authorized && <NavLink to='/profile' className='link link_header'><button className='header__account'>Аккаунт</button></NavLink>}
         {authorized && <div onClick={openBurger} className='header__burger'></div>}
         {authorized && <div ref={burgerMenu} className='header__burger-menu'>
             <div onClick={closeBurger} className='header__burger-close'></div>
             <Navigation burger={true}/>
-            <button className='header__account header__account_768'><NavLink to='/profile' className='link'>Аккаунт</NavLink></button>
+            <NavLink to='/profile' className='link link_header link_header-768'><button className='header__account header__account_768'>Аккаунт</button></NavLink>
           </div>}
         {!authorized && <div className='header__buttons'><NavLink to='/signout' className='link'>Регистрация</NavLink><button className='header__button button'><NavLink to='/signin' className='link'>Войти</NavLink></button></div>}
     </header>

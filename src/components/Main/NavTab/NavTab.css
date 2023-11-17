@@ -38,6 +38,10 @@
   align-items: center
 }
 
+.navtab__link:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 375px) {
   .navtab {
     column-gap: 6px;

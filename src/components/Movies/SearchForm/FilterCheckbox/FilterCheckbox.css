@@ -45,7 +45,7 @@
   background-color: var(--primary-color);
 }
 
-.checkbox__desc {
+.checkbox-desc {
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -60,7 +60,7 @@
 }
 
 @media screen and (max-width: 474px) {
-  .checkbox__desc {
+  .checkbox-desc {
     font-size: 11px;
   }
 }

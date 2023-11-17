@@ -28,6 +28,7 @@
   font-weight: 500;
   line-height: 114.286%;
   color: white;
+  cursor: pointer;
 }
 
 .header__buttons {
@@ -70,6 +71,11 @@
   transform: translateX(0);
 }
 
+.link_header {
+  grid-area: right;
+  justify-self: end;
+}
+
 @media screen and (max-width: 1200px) {
   .header {
     padding: 18px 30px;
@@ -97,8 +103,11 @@
   }
 
   .header__account_768 {
-    margin-top: auto;
     display: inline-block;
+  }
+
+  .link_header-768 {
+    margin-top: auto;
   }
 
   .header__burger-close {

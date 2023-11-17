@@ -9,7 +9,7 @@ const Navigation = ({burger = undefined}) => {
   return (
     <nav className={cn({
       'navigation': burger === undefined,
-      'navigation_768': burger
+      'navigation navigation_768': burger
     })}>
       {burger && <NavLink to='/' className={cn('link', 'navigation__link', {
         'navigation__link_active': path === '/'

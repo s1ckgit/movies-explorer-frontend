@@ -9,6 +9,7 @@ import NotFound from '../NotFound/NotFound';
 import Profile from '../Profile/Profile';
 
 const App = () => {
+  document.documentElement.lang = 'ru'
   return (
     <div className='page'>
       <Routes>

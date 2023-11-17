@@ -8,7 +8,7 @@ const FilterCheckbox = () => {
         <input className='checkbox__input' type='checkbox' />
         <div className='checkbox__mask'></div>
       </span>
-      <span className='checkbox__desc'>Короткометражки</span>
+      <span className='checkbox-desc'>Короткометражки</span>
     </div>
   )
 }
