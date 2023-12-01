@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import './SearchForm.css'
 import find from '../../../images/find.svg'
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox'
 
-const SearchForm = () => {
+const SearchForm = ({setRenderMore, searchMovies, setSearchRequest, setCheckboxState, error}) => {
+  const input = useRef()
+
+  useEffect(() => {
+    if(localStorage.getItem('searchRequest')) {
+      input.current.value = localStorage.getItem('searchRequest')
+    }
+  }, [])
+
+  function changeSearchRequest(e) {
+    const value = e.target.value
+    setSearchRequest(value)
+  }
+
   return (
-    <div className='searchForm container'>
-      <form className='searchForm__form'>
-        <input required name='search' type='search' placeholder='Фильм' className='searchForm__input'></input>
-        <button className='button searchForm__button' type='submit'><img src={find} alt='Кнопка поиска'/></button>
-        <FilterCheckbox />
+    <div className='search-form container'>
+      <form noValidate onSubmit={searchMovies} className='search-form__form'>
+        <input ref={input} onChange={changeSearchRequest} required name='search' type='search' placeholder='Фильм' className='search-form__input'></input>
+        <button onClick={() => setRenderMore(0)} className='button search-form__button' type='submit'><img src={find} alt='Кнопка поиска'/></button>
+        <FilterCheckbox searchMovies={searchMovies} setCheckboxState={setCheckboxState} />
       </form>
+      {error && <span className='search-form__error'>Нужно ввести ключевое слово</span>}
     </div>
   )
 }

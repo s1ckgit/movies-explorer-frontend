@@ -7,10 +7,10 @@ import Portfolio from './Portfolio/Portfolio'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 
-const Main = () => {
+const Main = ({authorized}) => {
   return (
     <>
-      <Header authorized={true}/>
+      <Header authorized={authorized}/>
       <main className='main'>
         <Promo />
         <AboutProject />

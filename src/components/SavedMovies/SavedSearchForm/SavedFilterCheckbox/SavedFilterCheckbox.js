@@ -1,21 +1,13 @@
-import React, { useEffect, useRef } from 'react'
-import './FilterCheckbox.css'
+import React, { useRef } from 'react'
+import './SavedFilterCheckbox.css'
 
-const FilterCheckbox = ({setCheckboxState, searchMovies}) => {
+const SavedFilterCheckbox = ({setCheckboxState, searchMovies}) => {
   const checkbox = useRef()
-
-  useEffect(() => {
-    if(localStorage.getItem('checkboxState')) {
-      checkbox.current.checked = JSON.parse(localStorage.getItem('checkboxState'))
-      setCheckboxState(checkbox.current.checked)
-    }
-  }, [setCheckboxState])
 
   function toggleCheckbox(e) {
     const checked = e.target.checked
     searchMovies(e, checkbox.current)
-    setCheckboxState(checked)
-    localStorage.setItem('checkboxState', checked)
+    setCheckboxState(checkbox.current.checked)
   }
 
   return (
@@ -29,4 +21,4 @@ const FilterCheckbox = ({setCheckboxState, searchMovies}) => {
   )
 }
 
-export default FilterCheckbox
+export default SavedFilterCheckbox

@@ -1,0 +1,54 @@
+.authError {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+  position: relative;
+}
+
+.authError__title {
+  font-size: 140px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.authError__subtitle {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.authError__button {
+  margin-top: 10px;
+  background-color: var(--primary-color);
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-duration);
+}
+
+.authError__button:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 376px) {
+  .authError__title {
+    font-size: 80px;
+  }
+
+  .authError__subtitle {
+    font-size: 12px;
+  }
+
+  .authError__link {
+    font-size: 12px;
+  }
+}

@@ -1,27 +1,103 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Profile.css'
 import Header from '../Header/Header'
+import useFormWithValidation from '../useFormWithValidation/useFormWithValidation'
+import {CurrentUserContext} from '../../contexts/CurrentUserContext'
+import mainApi from '../../utils/MainApi'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext'
+import cn from 'classnames'
 
-const Profile = () => {
+const Profile = ({authorized}) => {
+  const navigate = useNavigate()
+  const {unathorize} = useContext(AuthContext)
+  const name = useRef()
+  const email = useRef()
+  const {currentUser, setCurrentUser} = useContext(CurrentUserContext)
+  const {values, handleChange, errors, isValid, setIsValid, setValues} = useFormWithValidation()
+  const [error, setError] = useState(null)
+  const result = useRef()
+
+  useEffect(() => {
+    name.current.value = currentUser.name
+    name.current.dataset.isValid = true
+    email.current.value = currentUser.email
+    email.current.dataset.isValid = true
+
+    setValues({
+      name: {
+        value: currentUser.name,
+        isValid: true
+      },
+      email: {
+        value: currentUser.email,
+        isValid: true
+      }
+    })
+    setIsValid(true)
+  }, [])
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const email = values.email.value
+    const name = values.name.value
+
+    mainApi.changeUserData({
+      email,
+      name
+    })
+      .then((res) => {
+        const {email, name} = res
+        setCurrentUser({
+          ...currentUser,
+          email,
+          name
+        })
+        localStorage.setItem('user', JSON.stringify(res))
+        result.current.innerText = 'Данные были успешно изменены'
+        setTimeout(() => {
+          result.current.innerText = ''
+        }, 5000)
+      })
+      .catch((err) => {
+        setError(err)
+      })
+  }
+
+  function handleUnathorize(e) {
+    mainApi.unathorize()
+      .then((res) => {
+        navigate('/')
+        unathorize()
+      })
+      .catch((err) => {
+        setError(err)
+      })
+  }
+
   return (
     <>
-      <Header authorized={true}/>
+      <Header authorized={authorized}/>
       <section className='profile'>
-      <h1 className='profile__title'>Привет, Виталий!</h1>
+      <h1 className='profile__title'>Привет, {currentUser.name}</h1>
 
-      <form className='profile-form'>
-        <span className='profile-form__span profile-form__span_name'>
-          <input name='name' id='name' className='profile-form__input profile-form__input_name'/>
-        </span>
+      <form noValidate onSubmit={handleSubmit} className='profile-form'>
+        <label className='profile-form__label profile-form__label_name'>
+          <input ref={name} onChange={handleChange} name='name' id='name' className='profile-form__input profile-form__input_name'/>
+          <span className='profile-form__error'>{errors.name}</span>
+        </label>
 
-        <span className='profile-form__span profile-form__span_email'>
-          <input name='email' id='email' className='profile-form__input profile-form__input_email'/>
-        </span>
+        <label className='profile-form__label profile-form__label_email'>
+          <input ref={email} onChange={handleChange} name='email' id='email' className='profile-form__input profile-form__input_email'/>
+          <span className='profile-form__error'>{errors.email}</span>
+        </label>
 
 
-
-        <button type='submit' className='link profile-form__submit'>Редактировать</button>
-        <button type='button' className='link profile-form__exit'>Выйти из аккаунта</button>
+        <span ref={result} className={cn('profile-form__result', {
+          'profile-form__result_error': error != null
+        })}>{error && error.message}</span>
+        <button disabled={!isValid} type='submit' className='link profile-form__submit'>Редактировать</button>
+        <button onClick={handleUnathorize} type='button' className='link profile-form__exit'>Выйти из аккаунта</button>
       </form>
     </section>
     </>
