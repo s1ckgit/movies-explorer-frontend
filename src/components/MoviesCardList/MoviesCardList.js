@@ -11,7 +11,8 @@ import { ErrorContext } from '../../contexts/ErrorContext'
 
 const MoviesCardList = () => {
 
-  const [data, setData] = useState(undefined)
+  const [globalData, setGlobalData] = useState(null)
+  const [dataToRender, setDataToRender] = useState(null)
   const [renderMore, setRenderMore] = useState(0)
   const [preloader, setPreloader] = useState(false)
   const [notFound, setNotFound] = useState(false)
@@ -51,7 +52,7 @@ const MoviesCardList = () => {
         setCheckboxState(JSON.parse(localStorage.getItem('checkboxState')))
       }
       if(localStorage.getItem('filmsToRender')) {
-        setData(JSON.parse((localStorage.getItem('filmsToRender'))))
+        setDataToRender(JSON.parse((localStorage.getItem('filmsToRender'))))
         if(JSON.parse(localStorage.getItem('filmsToRender')).length === 0) {
           setNotFound(true)
         }
@@ -71,7 +72,7 @@ const MoviesCardList = () => {
 
     setPreloader(true)
     setNotFound(false)
-    setData(undefined)
+    setDataToRender(null)
     setError(false)
 
     if(!searchRequest) {
@@ -81,7 +82,13 @@ const MoviesCardList = () => {
     }
 
     try {
-      const data = await moviesApi.getFilms()
+      let data
+      if(!globalData) {
+        data = await moviesApi.getFilms()
+        setGlobalData(data)
+      } else {
+        data = globalData
+      }
       const res = data.filter((film) => {
         const nameResult = film.nameRU.toLowerCase().includes(searchRequest.toLowerCase()) || film.nameEN.toLowerCase().includes(searchRequest.toLowerCase())
         if (checkbox) {
@@ -94,13 +101,15 @@ const MoviesCardList = () => {
       if (res.length === 0) {
         setNotFound(true)
       } else {
-        setData(res)
+        setDataToRender(res)
       }
 
       localStorage.setItem('filmsToRender', JSON.stringify(res))
+      localStorage.setItem('searchRequest', searchRequest)
 
       setSearchErrorState(false)
     } catch(e) {
+      console.log(e)
       setSearchErrorState(true)
     }
 
@@ -121,7 +130,7 @@ const MoviesCardList = () => {
 
   function renderCards() {
     renderedCards.current.clear()
-    return data.map((item, i) => {
+    return dataToRender.map((item, i) => {
       if (windowWidth >= 1075) {
         if (i < 12 + renderMore) {
           renderedCards.current.add(item.id)
@@ -147,10 +156,10 @@ const MoviesCardList = () => {
       {preloader && <Preloader />}
       {notFound && <NotFoundResult />}
       {searchErrorState && <SearchError />}
-      {(data && data.length > 0) && <div className='moviesList'>
+      {(dataToRender && dataToRender.length > 0) && <div className='moviesList'>
         {renderCards()}
       </div>}
-      {data && (data.length > renderedCards.current.size) && <button onClick={toRenderMore} className='button moviesList-button'>Ещё</button>}
+      {dataToRender && (dataToRender.length > renderedCards.current.size) && <button onClick={toRenderMore} className='button moviesList-button'>Ещё</button>}
     </>
   )
 }

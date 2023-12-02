@@ -14,14 +14,8 @@ const SavedMoviesCardList = () => {
 
   const [searchErrorState, setSearchErrorState] = useState(false)
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
   const [searchRequest, setSearchRequest] = useState('')
   const [checkboxState, setCheckboxState] = useState(false)
-
-  function changeWindowWidth() {
-    setWindowWidth(window.innerWidth)
-  }
 
   useEffect(() => {
     mainApi.getMovies()
@@ -34,12 +28,6 @@ const SavedMoviesCardList = () => {
         setSearchErrorState(true)
       })
   }, [wasDeleted])
-
-  useEffect(() => {
-    // Проверка размера окна для изменения сетки
-    window.addEventListener('resize', changeWindowWidth)
-    return () => window.removeEventListener('resize', changeWindowWidth)
-  })
 
   function searchMovies(e, checkboxElement) {
     let checkbox
@@ -73,21 +61,7 @@ const SavedMoviesCardList = () => {
   }
 
   function renderCards() {
-    return dataToShow.map((item, i) => {
-      if (windowWidth >= 1075) {
-        if (i < 12) {
-          return <MoviesCard setWasDeleted={setWasDeleted} data={item} key={item.movieId} isSaved={true} dataImage={item.image} dataMovieId={item.movieId} dataThumbnail={item.thumbnail}/>
-        }
-      } else if (windowWidth < 1075 && windowWidth > 766) {
-        if (i < 8) {
-          return <MoviesCard data={item} key={item.movieId} isSaved={true} dataImage={item.image} dataMovieId={item.movieId} dataThumbnail={item.thumbnail}/>
-        }
-      } else {
-        if (i < 5) {
-          return <MoviesCard data={item} key={item.movieId} isSaved={true} dataImage={item.image} dataMovieId={item.movieId} dataThumbnail={item.thumbnail}/>
-        }
-      }
-    })
+    return dataToShow.map((item, i) => <MoviesCard setWasDeleted={setWasDeleted} data={item} key={item.movieId} isSaved={true} dataImage={item.image} dataMovieId={item.movieId} dataThumbnail={item.thumbnail}/>)
   }
 
   return (

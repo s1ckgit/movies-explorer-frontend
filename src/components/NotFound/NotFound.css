@@ -24,7 +24,7 @@
   margin: 0;
 }
 
-.notFound__link {
+.notFound__button {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -34,6 +34,7 @@
   bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
+  background-color: transparent;
 }
 
 @media screen and (max-width: 376px) {

@@ -144,6 +144,10 @@
   color: #4285F4;
 }
 
+.sign-form-section__link {
+  max-height: 38px;
+}
+
 .sign-form__server-error {
   margin-top: auto;
   text-align: center;

@@ -26,7 +26,7 @@ const useFormWithValidation = () => {
   }
 
   function checkNameInputValidity(name, value, target) {
-    const isValid = value.match(/[а-яёa-z \-]+/iug) ? (value.match(/[а-яёa-z \-]+/iug)[0].length == value.length) : false
+    const isValid = value.match(/[а-яёa-z \-]+/iug) ? (value.match(/[а-яёa-z \-]+/iug)[0].length === value.length) : false
     setValues({...values, [name]: {
       'value': value,
       'isValid': isValid
@@ -100,7 +100,7 @@ const useFormWithValidation = () => {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, resetForm, setIsValid, setValues };
+  return { values, handleChange, errors, isValid, resetForm, setIsValid, setValues, setErrors };
 }
 
 export default useFormWithValidation

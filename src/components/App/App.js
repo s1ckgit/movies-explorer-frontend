@@ -31,8 +31,7 @@ const App = () => {
 
   function unathorize() {
     setAuthorized(false)
-    localStorage.setItem('authorized', false)
-    localStorage.removeItem('user')
+    localStorage.clear()
   }
 
   useEffect(() => {

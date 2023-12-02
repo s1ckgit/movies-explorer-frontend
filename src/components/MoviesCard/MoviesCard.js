@@ -74,10 +74,8 @@ const MoviesCard = ({data, isSaved, dataThumbnail, dataImage, dataMovieId, setWa
         'movies-card__saved-button_to-delete': path === '/saved-movies'
       })} type='button' onClick={removeFilm} />}
 
-      {path === '/movies' &&
-      <button onClick={saveFilm} className={cn('movies-card__save', 'button', {
-        'movies-card__save_hidden': saved === true
-      })} type='button'>Сохранить</button>}
+      {(path === '/movies' && !saved) &&
+      <button onClick={saveFilm} className={cn('movies-card__save', 'button')} type='button'>Сохранить</button>}
 
       <img onClick={(e) => {
         e.stopPropagation()

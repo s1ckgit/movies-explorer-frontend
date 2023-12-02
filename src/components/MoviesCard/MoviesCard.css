@@ -86,22 +86,30 @@
   background: url('../../images/save.svg');
 }
 
-.movies-card__saved-button_saved:hover {
-  background: url('../../images/delete.svg');
-}
-
 .movies-card__saved-button_to-delete {
+  transition: all var(--transition-duration);
+  transform: translateX(calc(100% + 14px));
   background: url('../../images/delete.svg')
 }
 
-.movies-card:hover .movies-card__save_hidden {
-  transform: translateX(calc(100% + 14px));
+.movies-card:hover .movies-card__saved-button_to-delete{
+  transform: translateX(0);
 }
 
 
 @media screen and (max-width: 800px) {
   .movies-card__image {
     height: 190px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card__saved-button_to-delete {
+    transform: translateX(0);
+  }
+
+  .movies-card__save {
+    transform: translateX(0);
   }
 }
 

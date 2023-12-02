@@ -11,18 +11,18 @@ import cn from 'classnames'
 const Profile = ({authorized}) => {
   const navigate = useNavigate()
   const {unathorize} = useContext(AuthContext)
-  const name = useRef()
-  const email = useRef()
+  const nameInputElement = useRef()
+  const emailInputElement = useRef()
   const {currentUser, setCurrentUser} = useContext(CurrentUserContext)
   const {values, handleChange, errors, isValid, setIsValid, setValues} = useFormWithValidation()
   const [error, setError] = useState(null)
   const result = useRef()
 
   useEffect(() => {
-    name.current.value = currentUser.name
-    name.current.dataset.isValid = true
-    email.current.value = currentUser.email
-    email.current.dataset.isValid = true
+    nameInputElement.current.value = currentUser.name
+    nameInputElement.current.dataset.isValid = true
+    emailInputElement.current.value = currentUser.email
+    emailInputElement.current.dataset.isValid = true
 
     setValues({
       name: {
@@ -34,13 +34,24 @@ const Profile = ({authorized}) => {
         isValid: true
       }
     })
-    setIsValid(true)
+    setIsValid(false)
   }, [])
+
+  function onChange(e) {
+    handleChange(e)
+    if(nameInputElement.current.value === currentUser.name && emailInputElement.current.value === currentUser.email) {
+      setIsValid(false)
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
     const email = values.email.value
     const name = values.name.value
+
+    setIsValid(false)
+    nameInputElement.current.readOnly = true
+    emailInputElement.current.readOnly = true
 
     mainApi.changeUserData({
       email,
@@ -61,6 +72,11 @@ const Profile = ({authorized}) => {
       })
       .catch((err) => {
         setError(err)
+      })
+      .finally(() => {
+        setIsValid(true)
+        nameInputElement.current.readOnly = false
+        emailInputElement.current.readOnly = false
       })
   }
 
@@ -83,12 +99,12 @@ const Profile = ({authorized}) => {
 
       <form noValidate onSubmit={handleSubmit} className='profile-form'>
         <label className='profile-form__label profile-form__label_name'>
-          <input ref={name} onChange={handleChange} name='name' id='name' className='profile-form__input profile-form__input_name'/>
+          <input ref={nameInputElement} onChange={onChange} name='name' id='name' className='profile-form__input profile-form__input_name'/>
           <span className='profile-form__error'>{errors.name}</span>
         </label>
 
         <label className='profile-form__label profile-form__label_email'>
-          <input ref={email} onChange={handleChange} name='email' id='email' className='profile-form__input profile-form__input_email'/>
+          <input ref={emailInputElement} onChange={onChange} name='email' id='email' className='profile-form__input profile-form__input_email'/>
           <span className='profile-form__error'>{errors.email}</span>
         </label>
 
