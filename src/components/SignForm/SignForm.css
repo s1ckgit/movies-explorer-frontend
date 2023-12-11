@@ -1,0 +1,144 @@
+.sign-form-section {
+  margin: 0 auto;
+  max-width: 396px;
+  padding: 70px 0px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  min-height: 100vh;
+}
+
+.sign-form-section__logo {
+  width: 38px;
+}
+
+.sign-form-section__title {
+  margin: 0;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.sign-form__input:last-child {
+  margin-bottom: 0;
+}
+
+.sign-form__label {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #8B8B8B;
+}
+
+.sign-form__fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.sign-form__fieldset_error {
+  margin-bottom: 10px;
+}
+
+.sign-form__input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  background: #2F2F2F;
+  border: none;
+  color: white;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  z-index: 1;
+  position: relative;
+}
+
+.sign-form__input:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+.sign-form__input_error {
+  color: #EE3465;
+}
+
+.sign-form__error {
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  transition: all var(--transition-duration);
+  display: block;
+  transform: translateY(-200%);
+}
+
+.sign-form__error_visible {
+  display: block;
+  transform: translateY(0)
+}
+
+.sign-form__button {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background: #4285F4;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  transition: all var(--transition-duration);
+  margin-top: auto;
+}
+
+.sign-form__button:hover {
+  opacity: .7;
+}
+
+.sign-form__tip {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #8B8B8B;
+}
+
+.sign-form__link {
+  color: #4285F4;
+}
+
+@media screen and (max-width: 470px) {
+  .sign-form-section {
+    padding: 56px 30px 30px;
+  }
+
+  .sign-form-section__logo {
+    align-self: center;
+  }
+
+  .sign-form-section__title {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+  }
+}
