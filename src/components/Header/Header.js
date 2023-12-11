@@ -28,7 +28,7 @@ const Header = ({authorized}) => {
             <Navigation burger={true}/>
             <NavLink to='/profile' className='link link_header link_header-768'><button className='header__account header__account_768'>Аккаунт</button></NavLink>
           </div>}
-        {!authorized && <div className='header__buttons'><NavLink to='/signout' className='link'>Регистрация</NavLink><button className='header__button button'><NavLink to='/signin' className='link'>Войти</NavLink></button></div>}
+        {!authorized && <div className='header__buttons'><NavLink to='/signup' className='link'>Регистрация</NavLink><button className='header__button button'><NavLink to='/signin' className='link'>Войти</NavLink></button></div>}
     </header>
   )
 }
