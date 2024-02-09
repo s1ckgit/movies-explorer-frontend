@@ -2,7 +2,11 @@
 
 # Фронтенд часть дипломного проекта movies-explorer для Яндекс.Практикум
 
-## Проект выполнен по макету - https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/ (dark-2)
+### Описание:
+
+Сервис для поиска фильмов с возможностью сохранять их в свой профиль.
+
+### Проект выполнен по макету - https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/ (dark-2)
 
 ### Стэк:
 * HTML
