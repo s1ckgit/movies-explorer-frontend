@@ -1,4 +1,4 @@
-![Превью](https://github.com/s1ckgit/movies-explorer-frontend/blob/main/RESULT_MAIN.jpg)
+![Превью](https://github.com/s1ckgit/movies-explorer-frontend/blob/main/RESULT_MAIN.png)
 
 # Фронтенд часть дипломного проекта movies-explorer для Яндекс.Практикум
 
