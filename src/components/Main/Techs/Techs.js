@@ -1,5 +1,5 @@
-import React from 'react'
-import './Techs.css'
+import React from 'react';
+import './Techs.css';
 
 const Techs = () => {
   return (
@@ -21,7 +21,7 @@ const Techs = () => {
         </ul>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Techs
+export default Techs;

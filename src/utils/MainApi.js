@@ -1,9 +1,9 @@
 class MainApi {
   constructor() {
-    this._baseUrl = 'https://api.diploma.siick.nomoredomainsrocks.ru'
+    this._baseUrl = 'http://localhost:3001';
     this._headers = {
       'Content-Type': 'application/json'
-    }
+    };
   }
 
   checkJwt(id) {
@@ -16,22 +16,22 @@ class MainApi {
       credentials: 'include'
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 
   _checkResponse(res) {
     if(res.ok) {
       return res.json()
         .then((res) => {
-          return Promise.resolve(res)
-        })
+          return Promise.resolve(res);
+        });
     }
 
     return res.json()
       .then((res) => {
-        return Promise.reject(res)
-      })
+        return Promise.reject(res);
+      });
   }
 
   registerUser(data) {
@@ -42,8 +42,8 @@ class MainApi {
       credentials: 'include'
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 
   loginUser(data) {
@@ -54,8 +54,8 @@ class MainApi {
       credentials: 'include'
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 
   unathorize() {
@@ -65,8 +65,8 @@ class MainApi {
       credentials: 'include'
     })
       .then((res) => {
-        return this._checkResponse(res)
-      })
+        return this._checkResponse(res);
+      });
   }
 
   changeUserData(data) {
@@ -77,8 +77,8 @@ class MainApi {
       headers: this._headers
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 
   getMovies() {
@@ -86,8 +86,8 @@ class MainApi {
       credentials: 'include'
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 
   saveMovie(data) {
@@ -98,8 +98,8 @@ class MainApi {
       credentials: 'include',
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 
   deleteMovie(id) {
@@ -109,11 +109,11 @@ class MainApi {
       credentials: 'include'
     })
     .then((res) => {
-      return this._checkResponse(res)
-    })
+      return this._checkResponse(res);
+    });
   }
 }
 
-const mainApi = new MainApi()
+const mainApi = new MainApi();
 
-export default mainApi
+export default mainApi;

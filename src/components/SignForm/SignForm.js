@@ -1,37 +1,37 @@
-import React, { useContext, useState } from 'react'
-import './SignForm.css'
-import logo from '../../images/logo.svg'
-import { NavLink, useNavigate } from 'react-router-dom'
-import useFormWithValidation from '../useFormWithValidation/useFormWithValidation'
-import mainApi from '../../utils/MainApi'
-import { CurrentUserContext } from '../../contexts/CurrentUserContext'
-import { AuthContext } from '../../contexts/AuthContext'
-import cn from 'classnames'
-import { useRef } from 'react'
+import React, { useContext, useState } from 'react';
+import './SignForm.css';
+import logo from '../../images/logo.svg';
+import { NavLink, useNavigate } from 'react-router-dom';
+import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
+import mainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import cn from 'classnames';
+import { useRef } from 'react';
 
-const SignForm = ({register}) => {
-  const {authorize} = useContext(AuthContext)
-  const navigate = useNavigate()
-  const { setCurrentUser } = useContext(CurrentUserContext)
-  const {values, handleChange, errors, isValid, resetForm, setIsValid} = useFormWithValidation()
-  const [error, setError] = useState(null)
-  const nameInputElement = useRef()
-  const emailInputElement = useRef()
-  const passwordInputElement = useRef()
+const SignForm = ({ register }) => {
+  const { authorize } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { setCurrentUser } = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm, setIsValid } = useFormWithValidation();
+  const [error, setError] = useState(null);
+  const nameInputElement = useRef();
+  const emailInputElement = useRef();
+  const passwordInputElement = useRef();
 
   function handleSubmit(e) {
-    const name = values.name?.value
-    const email = values.email?.value
-    const password = values.password?.value
+    const name = values.name?.value;
+    const email = values.email?.value;
+    const password = values.password?.value;
 
-    setIsValid(false)
+    setIsValid(false);
     if(nameInputElement.current) {
-      nameInputElement.current.readOnly = true
+      nameInputElement.current.readOnly = true;
     }
-    emailInputElement.current.readOnly = true
-    passwordInputElement.current.readOnly = true
+    emailInputElement.current.readOnly = true;
+    passwordInputElement.current.readOnly = true;
 
-    e.preventDefault()
+    e.preventDefault();
     if(register) {
       mainApi.registerUser({
         name,
@@ -39,48 +39,48 @@ const SignForm = ({register}) => {
         password
       })
         .then((res) => {
-          setCurrentUser(res)
-          resetForm()
-          authorize(res)
-          localStorage.setItem('id', res._id)
-          navigate('/movies')
-          setError(null)
+          setCurrentUser(res);
+          resetForm();
+          authorize(res);
+          localStorage.setItem('id', res._id);
+          navigate('/movies');
+          setError(null);
         })
         .catch((err) => {
-          setError(err)
+          setError(err);
         })
         .finally(() => {
-          setIsValid(true)
+          setIsValid(true);
           if(nameInputElement.current) {
-            nameInputElement.current.readOnly = false
+            nameInputElement.current.readOnly = false;
           }
-          emailInputElement.current.readOnly = false
-          passwordInputElement.current.readOnly = false
-        })
+          emailInputElement.current.readOnly = false;
+          passwordInputElement.current.readOnly = false;
+        });
     } else {
       mainApi.loginUser({
         email,
         password
       })
         .then((res) => {
-          setCurrentUser(res)
-          resetForm()
-          authorize(res)
-          localStorage.setItem('id', res._id)
-          navigate('/movies')
-          setError(null)
+          setCurrentUser(res);
+          resetForm();
+          authorize(res);
+          localStorage.setItem('id', res._id);
+          navigate('/movies');
+          setError(null);
         })
         .catch((err) => {
-          setError(err)
+          setError(err);
         })
         .finally(() => {
-          setIsValid(true)
+          setIsValid(true);
           if(nameInputElement.current) {
-            nameInputElement.current.readOnly = false
+            nameInputElement.current.readOnly = false;
           }
-          emailInputElement.current.readOnly = false
-          passwordInputElement.current.readOnly = false
-        })
+          emailInputElement.current.readOnly = false;
+          passwordInputElement.current.readOnly = false;
+        });
     }
   }
 
@@ -123,7 +123,7 @@ const SignForm = ({register}) => {
       </form>
 
     </section>
-  )
-}
+  );
+};
 
-export default SignForm
+export default SignForm;

@@ -1,21 +1,21 @@
-import React, { useEffect, useRef } from 'react'
-import './FilterCheckbox.css'
+import React, { useEffect, useRef } from 'react';
+import './FilterCheckbox.css';
 
-const FilterCheckbox = ({setCheckboxState, searchMovies}) => {
-  const checkbox = useRef()
+const FilterCheckbox = ({ setCheckboxState, searchMovies }) => {
+  const checkbox = useRef();
 
   useEffect(() => {
     if(localStorage.getItem('checkboxState')) {
-      checkbox.current.checked = JSON.parse(localStorage.getItem('checkboxState'))
-      setCheckboxState(checkbox.current.checked)
+      checkbox.current.checked = JSON.parse(localStorage.getItem('checkboxState'));
+      setCheckboxState(checkbox.current.checked);
     }
-  }, [setCheckboxState])
+  }, [setCheckboxState]);
 
   function toggleCheckbox(e) {
-    const checked = e.target.checked
-    searchMovies(e, checkbox.current)
-    setCheckboxState(checked)
-    localStorage.setItem('checkboxState', checked)
+    const checked = e.target.checked;
+    searchMovies(e, checkbox.current);
+    setCheckboxState(checked);
+    localStorage.setItem('checkboxState', checked);
   }
 
   return (
@@ -26,7 +26,7 @@ const FilterCheckbox = ({setCheckboxState, searchMovies}) => {
       </span>
       <span className='checkbox-desc'>Короткометражки</span>
     </div>
-  )
-}
+  );
+};
 
-export default FilterCheckbox
+export default FilterCheckbox;

@@ -1,28 +1,28 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import './Profile.css'
-import Header from '../Header/Header'
-import useFormWithValidation from '../useFormWithValidation/useFormWithValidation'
-import {CurrentUserContext} from '../../contexts/CurrentUserContext'
-import mainApi from '../../utils/MainApi'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/AuthContext'
-import cn from 'classnames'
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import './Profile.css';
+import Header from '../Header/Header';
+import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import mainApi from '../../utils/MainApi';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import cn from 'classnames';
 
-const Profile = ({authorized}) => {
-  const navigate = useNavigate()
-  const {unathorize} = useContext(AuthContext)
-  const nameInputElement = useRef()
-  const emailInputElement = useRef()
-  const {currentUser, setCurrentUser} = useContext(CurrentUserContext)
-  const {values, handleChange, errors, isValid, setIsValid, setValues} = useFormWithValidation()
-  const [error, setError] = useState(null)
-  const result = useRef()
+const Profile = ({ authorized }) => {
+  const navigate = useNavigate();
+  const { unathorize } = useContext(AuthContext);
+  const nameInputElement = useRef();
+  const emailInputElement = useRef();
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, setIsValid, setValues } = useFormWithValidation();
+  const [error, setError] = useState(null);
+  const result = useRef();
 
   useEffect(() => {
-    nameInputElement.current.value = currentUser.name
-    nameInputElement.current.dataset.isValid = true
-    emailInputElement.current.value = currentUser.email
-    emailInputElement.current.dataset.isValid = true
+    nameInputElement.current.value = currentUser.name;
+    nameInputElement.current.dataset.isValid = true;
+    emailInputElement.current.value = currentUser.email;
+    emailInputElement.current.dataset.isValid = true;
 
     setValues({
       name: {
@@ -33,62 +33,64 @@ const Profile = ({authorized}) => {
         value: currentUser.email,
         isValid: true
       }
-    })
-    setIsValid(false)
-  }, [])
+    });
+    setIsValid(false);
+  }, [currentUser.name, currentUser.email, setValues, setIsValid]);
 
   function onChange(e) {
-    handleChange(e)
+    handleChange(e);
     if(nameInputElement.current.value === currentUser.name && emailInputElement.current.value === currentUser.email) {
-      setIsValid(false)
+      setIsValid(false);
     }
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
-    const email = values.email.value
-    const name = values.name.value
+    e.preventDefault();
+    const email = values.email.value;
+    const name = values.name.value;
 
-    setIsValid(false)
-    nameInputElement.current.readOnly = true
-    emailInputElement.current.readOnly = true
+    setIsValid(false);
+    nameInputElement.current.readOnly = true;
+    emailInputElement.current.readOnly = true;
 
     mainApi.changeUserData({
       email,
       name
     })
       .then((res) => {
-        const {email, name} = res
+        const { email, name } = res;
         setCurrentUser({
           ...currentUser,
           email,
           name
-        })
-        localStorage.setItem('user', JSON.stringify(res))
-        result.current.innerText = 'Данные были успешно изменены'
+        });
+        localStorage.setItem('user', JSON.stringify(res));
+        result.current.innerText = 'Данные были успешно изменены';
         setTimeout(() => {
-          result.current.innerText = ''
-        }, 5000)
+          if (result.current) {
+            result.current.innerText = '';
+          }
+        }, 5000);
       })
       .catch((err) => {
-        setError(err)
+        setError(err);
       })
       .finally(() => {
-        setIsValid(true)
-        nameInputElement.current.readOnly = false
-        emailInputElement.current.readOnly = false
-      })
+        setIsValid(true);
+        nameInputElement.current.readOnly = false;
+        emailInputElement.current.readOnly = false;
+      });
   }
 
   function handleUnathorize(e) {
     mainApi.unathorize()
       .then((res) => {
-        navigate('/')
-        unathorize()
+        navigate('/');
+        unathorize();
       })
       .catch((err) => {
-        setError(err)
-      })
+        setError(err);
+      });
   }
 
   return (
@@ -117,7 +119,7 @@ const Profile = ({authorized}) => {
       </form>
     </section>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

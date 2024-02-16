@@ -23,8 +23,37 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "plugins": ["react"],
+    "rules": {
+      "object-curly-spacing": ["error", "always"],
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "semi": "error",
+      "no-useless-escape": "off"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": "latest",
+      "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    }
   },
   "browserslist": {
     "production": [
