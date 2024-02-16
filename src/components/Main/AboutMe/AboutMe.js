@@ -1,5 +1,5 @@
-import React from 'react'
-import './AboutMe.css'
+import React from 'react';
+import './AboutMe.css';
 
 const AboutMe = () => {
   return (
@@ -16,7 +16,7 @@ const AboutMe = () => {
         <img className='aboutMe__photo' src='https://wiki.gbl.gg/images/2/2c/SKSOS_FaustVIII_Portrait.png' alt='тупа я)0)))'/>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default AboutMe
+export default AboutMe;

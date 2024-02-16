@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import './SavedMovies.css'
-import SearchForm from '../Movies/SearchForm/SearchForm'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import SavedMoviesCardList from '../SavedMoviesCardList/SavedMoviesCardList'
+import React from 'react';
+import './SavedMovies.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import SavedMoviesCardList from '../SavedMoviesCardList/SavedMoviesCardList';
 
-const SavedMovies = ({authorized}) => {
+const SavedMovies = ({ authorized }) => {
 
   return (
     <>
@@ -13,7 +12,7 @@ const SavedMovies = ({authorized}) => {
       <SavedMoviesCardList />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default SavedMovies
+export default SavedMovies;

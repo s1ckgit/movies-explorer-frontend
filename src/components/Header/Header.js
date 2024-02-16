@@ -1,18 +1,18 @@
-import React, { useRef } from 'react'
-import Navigation from '../Navigation/Navigation'
-import './Header.css'
-import logo from '../../images/logo.svg'
-import { NavLink } from 'react-router-dom'
+import React, { useRef } from 'react';
+import Navigation from '../Navigation/Navigation';
+import './Header.css';
+import logo from '../../images/logo.svg';
+import { NavLink } from 'react-router-dom';
 
-const Header = ({authorized}) => {
-  const burgerMenu = useRef()
+const Header = ({ authorized }) => {
+  const burgerMenu = useRef();
 
   function openBurger() {
-    burgerMenu.current.classList.add('header__burger-menu_opened')
+    burgerMenu.current.classList.add('header__burger-menu_opened');
   }
 
   function closeBurger() {
-    burgerMenu.current.classList.remove('header__burger-menu_opened')
+    burgerMenu.current.classList.remove('header__burger-menu_opened');
   }
 
   return (
@@ -30,7 +30,7 @@ const Header = ({authorized}) => {
           </div>}
         {!authorized && <div className='header__buttons'><NavLink to='/signup' className='link'>Регистрация</NavLink><button className='header__button button'><NavLink to='/signin' className='link'>Войти</NavLink></button></div>}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

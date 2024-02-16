@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -16,47 +16,47 @@ import AuthError from '../AuthError/AuthError';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
 const App = () => {
-  const authorizedStorage = JSON.parse(localStorage.getItem('authorized'))
-  const userDataStorage = JSON.parse(localStorage.getItem('user'))
-  const [authorized, setAuthorized] = useState(authorizedStorage)
-  const [currentUser, setCurrentUser] = useState(userDataStorage)
-  const [authError, setAuthError] = useState(null)
-  const [errorPopup, setErrorPopup] = useState(null)
+  const authorizedStorage = JSON.parse(localStorage.getItem('authorized'));
+  const userDataStorage = JSON.parse(localStorage.getItem('user'));
+  const [authorized, setAuthorized] = useState(Boolean(authorizedStorage));
+  const [currentUser, setCurrentUser] = useState(userDataStorage);
+  const [authError, setAuthError] = useState(null);
+  const [errorPopup, setErrorPopup] = useState(null);
 
   function authorize(user) {
-    setAuthorized(true)
-    localStorage.setItem('authorized', true)
-    localStorage.setItem('user', JSON.stringify(user))
+    setAuthorized(true);
+    localStorage.setItem('authorized', true);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   function unathorize() {
-    setAuthorized(false)
-    localStorage.clear()
+    setAuthorized(false);
+    localStorage.clear();
   }
 
   useEffect(() => {
-    const id = localStorage.getItem('id')
+    const id = localStorage.getItem('id');
     if (id) {
       mainApi.checkJwt(id)
         .then((res) => {
-          setCurrentUser(res)
-          authorize(res)
-          setAuthError(null)
+          setCurrentUser(res);
+          authorize(res);
+          setAuthError(null);
         })
         .catch((err) => {
-          setAuthError(err)
-        })
+          setAuthError(err);
+        });
     } else {
-      setCurrentUser(null)
-      unathorize()
+      setCurrentUser(null);
+      unathorize();
     }
-  }, [])
+  }, []);
 
-  document.documentElement.lang = 'ru'
+  document.documentElement.lang = 'ru';
   return (
-    <AuthContext.Provider value={{authorize, unathorize}}>
-      <CurrentUserContext.Provider value={{currentUser, setCurrentUser}}>
-        <ErrorContext.Provider value={{errorPopup, setErrorPopup}}>
+    <AuthContext.Provider value={{ authorize, unathorize }}>
+      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <ErrorContext.Provider value={{ errorPopup, setErrorPopup }}>
           <div className='page'>
             {errorPopup && <ErrorPopup err={errorPopup}/>}
             {authError && <AuthError err={authError}/>}
@@ -75,7 +75,7 @@ const App = () => {
     </AuthContext.Provider>
 
 
-  )
-}
+  );
+};
 
-export default App
+export default App;

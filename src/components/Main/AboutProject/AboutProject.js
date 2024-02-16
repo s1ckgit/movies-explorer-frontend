@@ -1,5 +1,5 @@
-import React from 'react'
-import './AboutProject.css'
+import React from 'react';
+import './AboutProject.css';
 
 const AboutProject = () => {
   return (
@@ -22,7 +22,7 @@ const AboutProject = () => {
         <div className='progress__description'>Front-end</div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default AboutProject
+export default AboutProject;

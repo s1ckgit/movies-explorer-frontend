@@ -1,6 +1,6 @@
-import React from 'react'
-import NavTab from '../NavTab/NavTab'
-import './Promo.css'
+import React from 'react';
+import NavTab from '../NavTab/NavTab';
+import './Promo.css';
 
 const Promo = () => {
   return (
@@ -10,7 +10,7 @@ const Promo = () => {
         <NavTab />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Promo
+export default Promo;

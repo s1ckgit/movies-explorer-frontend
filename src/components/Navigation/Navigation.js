@@ -1,10 +1,10 @@
-import React from 'react'
-import './Navigation.css'
-import { NavLink, useLocation } from 'react-router-dom'
-import cn from 'classnames'
+import React from 'react';
+import './Navigation.css';
+import { NavLink, useLocation } from 'react-router-dom';
+import cn from 'classnames';
 
-const Navigation = ({burger = undefined}) => {
-  const path = useLocation().pathname
+const Navigation = ({ burger = undefined }) => {
+  const path = useLocation().pathname;
 
   return (
     <nav className={cn({
@@ -21,7 +21,7 @@ const Navigation = ({burger = undefined}) => {
         'navigation__link_active': path === '/saved-movies'
       })}>Сохранённые фильмы</NavLink>
     </nav>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;
